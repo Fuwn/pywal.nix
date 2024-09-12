@@ -6,8 +6,7 @@
 Pywal colourschemes into any Home Manager configuration at evaluation-time.
 
 I needed a pure (not `--impure`) Nix solution. I made a pure Nix solution. It
-works well. I'll likely hack on it some more, even though I personally only use
-the `wal` backend.
+works well.
 
 ## Usage
 
@@ -53,6 +52,7 @@ the `pywal-nix` attribute.
   pywal-nix = {
     wallpaper = /path/to/wallpaper.png; # Required
     light = false;                      # Defaults to false
+    backend = "wal";                    # One of "wal", "colorz", or "colorthief"; Defaults to "wal"
   };
 
   # Example usage to print out two colourscheme colours
@@ -66,13 +66,16 @@ the `pywal-nix` attribute.
 
 ## Pywal
 
-This project combines the
-[`pywal/backends/wal.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/wal.py)
-and
-[`pywal/util.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/util.py)
-files from [dylanaraps/pywal](https://github.com/dylanaraps/pywal) into the
-[`wal.py`](./wal.py) file. Pywal is licensed under the
-[MIT License](https://github.com/dylanaraps/pywal/blob/master/LICENSE.md).
+This project includes multiple files from
+[dylanaraps/pywal](https://github.com/dylanaraps/pywal), a project which is
+licensed under the [MIT License](./pywal/LICENSE.md).
+
+- [`pywal/backends/colorthief.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/colorthief.py)
+- [`pywal/backends/colorz.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/colorz.py)
+- [`pywal/backends/wal.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/wal.py)
+- [`pywal/colors.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/colors.py)
+- [`pywal/theme.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/theme.py)
+- [`pywal/util.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/util.py)
 
 ## Licence
 

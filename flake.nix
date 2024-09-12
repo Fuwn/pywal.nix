@@ -25,12 +25,17 @@
                   buildInputs = with pkgs; [
                     imagemagick
                     jq
+                    python312Packages.colorthief
+                    colorz
                   ];
                 }
                 ''
-                  mkdir -p $out
+                  mkdir -p $out/wrapper
 
-                  ${pkgs.python3}/bin/python3 ${./wal.py} ${config.pywal-nix.wallpaper} ${
+                  cp ${./wrap.py} $out/wrapper/wrap.py
+                  cp -r ${./pywal} $out/wrapper/pywal
+
+                  ${pkgs.python3}/bin/python3 $out/wrapper/wrap.py ${config.pywal-nix.backend} ${config.pywal-nix.wallpaper} ${
                     if config.pywal-nix.light then "1" else "0"
                   } | \
                     sed "s/'/\"/g" | \
@@ -44,6 +49,16 @@
             wallpaper = lib.mkOption {
               type = lib.types.path;
               default = /path/to/wallpaper.png;
+            };
+
+            backend = lib.mkOption {
+              type = lib.types.enum [
+                "colorthief"
+                "colorz"
+                "wal"
+              ];
+
+              default = "wal";
             };
 
             light = lib.mkOption {
