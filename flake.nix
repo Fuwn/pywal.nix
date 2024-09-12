@@ -18,9 +18,9 @@
 
           pkgs = import nixpkgs { inherit system; };
 
-          colourscheme = builtins.fromJSON (
+          colourScheme = builtins.fromJSON (
             builtins.readFile "${
-              pkgs.runCommand "colourscheme"
+              pkgs.runCommand "colour-scheme"
                 {
                   buildInputs = with pkgs; [
                     imagemagick
@@ -39,9 +39,9 @@
                     if config.pywal-nix.light then "1" else "0"
                   } | \
                     sed "s/'/\"/g" | \
-                    jq 'to_entries | map({"colour\(.key)": .value}) | add' > $out/colourscheme
+                    jq 'to_entries | map({"colour\(.key)": .value}) | add' > $out/colour-scheme
                 ''
-            }/colourscheme"
+            }/colour-scheme"
           );
         in
         {
@@ -66,12 +66,12 @@
               default = false;
             };
 
-            colourscheme = lib.mkOption {
+            colourScheme = lib.mkOption {
               type = lib.types.attrsOf lib.types.str;
             };
           };
 
-          config.pywal-nix.colourscheme = colourscheme;
+          config.pywal-nix.colourScheme = colourScheme;
         };
     });
 }

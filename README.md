@@ -3,7 +3,7 @@
 > Extremely straightforward evaluation-time Pywal integration for Home Manager
 
 `pywal-nix` is focused on providing the simplest way of integrating custom
-Pywal colourschemes into any Home Manager configuration at evaluation-time.
+Pywal colour schemes into any Home Manager configuration at evaluation-time.
 
 I needed a pure (not `--impure`) Nix solution. I made a pure Nix solution. It
 works well.
@@ -55,10 +55,10 @@ the `pywal-nix` attribute.
     backend = "wal";                    # One of "wal", "colorz", or "colorthief"; Defaults to "wal"
   };
 
-  # Example usage to print out two colourscheme colours
+  # Example usage to print out two colour scheme colours
   home.packages = [
-    (pkgs.writeShellScriptBin "colourscheme-sample" ''
-      echo '${config.pywal-nix.colourscheme.colour0} ${config.pywal-nix.colourscheme.colour15}'
+    (pkgs.writeShellScriptBin "colour-scheme-sample" ''
+      echo '${config.pywal-nix.colourScheme.colour0} ${config.pywal-nix.colourScheme.colour15}'
     '')
   ];
 }
