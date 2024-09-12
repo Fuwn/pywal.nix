@@ -67,16 +67,27 @@
             };
 
             colourScheme = lib.mkOption {
-              type = lib.types.attrsOf lib.types.str;
+              type = lib.types.anything;
             };
 
             colorScheme = lib.mkOption {
-              type = lib.types.attrsOf lib.types.str;
+              type = lib.types.anything;
             };
           };
 
-          config.pywal-nix.colourScheme = colourScheme;
-          config.pywal-nix.colorScheme = colourScheme;
+          config.pywal-nix.colourScheme = {
+            wallpaper = config.pywal-nix.wallpaper;
+            colours = colourScheme;
+            colors = colourScheme;
+
+            special = {
+              background = colourScheme.colour0;
+              foreground = colourScheme.colour15;
+              cursor = colourScheme.colour15;
+            };
+          };
+
+          config.pywal-nix.colorScheme = config.pywal-nix.colourScheme;
         };
     });
 }
