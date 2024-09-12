@@ -29,54 +29,6 @@ from .settings import CACHE_DIR, CONF_DIR, MODULE_DIR
 from . import util
 
 
-def list_out():
-    """List all themes in a pretty format."""
-    dark_themes = [theme.name.replace(".json", "") for theme in list_themes()]
-    ligh_themes = [theme.name.replace(".json", "") for theme in list_themes(dark=False)]
-    user_themes = [theme.name.replace(".json", "") for theme in list_themes_user()]
-
-    try:
-        last_used_theme = util.read_file(os.path.join(CACHE_DIR, "last_used_theme"))[
-            0
-        ].replace(".json", "")
-    except FileNotFoundError:
-        last_used_theme = ""
-
-    if user_themes:
-        print("\033[1;32mUser Themes\033[0m:")
-        print(
-            " -",
-            "\n - ".join(
-                t + " (last used)" if t == last_used_theme else t
-                for t in sorted(user_themes)
-            ),
-        )
-
-    print("\033[1;32mDark Themes\033[0m:")
-    print(
-        " -",
-        "\n - ".join(
-            t + " (last used)" if t == last_used_theme else t
-            for t in sorted(dark_themes)
-        ),
-    )
-
-    print("\033[1;32mLight Themes\033[0m:")
-    print(
-        " -",
-        "\n - ".join(
-            t + " (last used)" if t == last_used_theme else t
-            for t in sorted(ligh_themes)
-        ),
-    )
-
-    print("\033[1;32mExtra\033[0m:")
-    print(" - random (select a random dark theme)")
-    print(" - random_dark (select a random dark theme)")
-    print(" - random_light (select a random light theme)")
-    print(" - random_user (select a random user theme)")
-
-
 def list_themes(dark=True):
     """List all installed theme files."""
     dark = "dark" if dark else "light"
@@ -178,12 +130,3 @@ def file(input_file, light=False):
     logging.error("Try adding   '-l' to set light themes.")
     logging.error("Try removing '-l' to set dark themes.")
     sys.exit(1)
-
-
-def save(colors, theme_name, light=False):
-    """Save colors to a theme file."""
-    theme_file = theme_name + ".json"
-    theme_path = os.path.join(
-        CONF_DIR, "colorschemes", "light" if light else "dark", theme_file
-    )
-    util.save_file_json(colors, theme_path)
