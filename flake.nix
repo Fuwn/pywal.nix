@@ -39,7 +39,7 @@
                     if config.pywal-nix.light then "1" else "0"
                   } | \
                     sed "s/'/\"/g" | \
-                    jq 'to_entries | map({"colour\(.key)": .value}) | add' > $out/colour-scheme
+                    jq 'to_entries | map({"colour\(.key)": .value, "color\(.key)": .value}) | add' > $out/colour-scheme
                 ''
             }/colour-scheme"
           );
@@ -69,9 +69,14 @@
             colourScheme = lib.mkOption {
               type = lib.types.attrsOf lib.types.str;
             };
+
+            colorScheme = lib.mkOption {
+              type = lib.types.attrsOf lib.types.str;
+            };
           };
 
           config.pywal-nix.colourScheme = colourScheme;
+          config.pywal-nix.colorScheme = colourScheme;
         };
     });
 }
