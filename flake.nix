@@ -8,6 +8,11 @@
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
     };
+
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -145,5 +150,7 @@
 
           config.pywal-nix.colorScheme = config.pywal-nix.colourScheme;
         };
+
+      formatter = nixpkgs.legacyPackages."${system}".nixfmt-rfc-style;
     });
 }
