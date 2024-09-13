@@ -3,15 +3,20 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     systems.url = "github:nix-systems/default";
     flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
   };
 
   outputs =
     {
       nixpkgs,
-      systems,
+      flake-utils,
       ...
     }:
-    (nixpkgs.lib.genAttrs (import systems)) (system: {
+    flake-utils.lib.eachDefaultSystem (system: {
       homeManagerModules.default =
         { config, ... }:
         let

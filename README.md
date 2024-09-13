@@ -23,7 +23,7 @@ works well.
         rev = "...";  # Use the current commit revision hash
         hash = "..."; # Use the current commit sha256 hash
       }
-    )).${builtins.currentSystem}.homeManagerModules.default
+    )).homeManagerModules.${builtins.currentSystem}.default
   ];
 }
 ```
@@ -53,7 +53,7 @@ module.
 
 inputs.home-manager.lib.homeManagerConfiguration {
   modules = [
-    inputs.pywal-nix.${pkgs.system}.homeManagerModules.default
+    inputs.pywal-nix.homeManagerModules.${pkgs.system}.default
   ];
 };
 
