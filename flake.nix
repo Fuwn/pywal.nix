@@ -131,7 +131,8 @@
           };
 
           config.pywal-nix.colourScheme = {
-            wallpaper = config.pywal-nix.wallpaper;
+            inherit (config.pywal-nix) wallpaper;
+
             colours = colourScheme;
             colors = colourScheme;
 
