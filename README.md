@@ -8,24 +8,42 @@ Pywal colour schemes into any Home Manager configuration at evaluation-time.
 I needed a pure (not `--impure`) Nix solution. I made a pure Nix solution. It
 works well.
 
-## Usage
+## Installation
 
-### Flake
+### Standalone Home-Manager
+
+```nix
+{ pkgs, ... }:
+{
+  imports = [
+    (import (
+      pkgs.fetchFromGitHub {
+        owner = "Fuwn";
+        repo = "pywal-nix";
+        rev = "...";  # Use the current commit revision hash
+        hash = "..."; # Use the current commit sha256 hash
+      }
+    )).${builtins.currentSystem}.homeManagerModules.default
+  ];
+}
+```
+
+> You can use projects like [nurl](https://github.com/nix-community/nurl) and
+> [`nix-prefetch`](https://github.com/msteen/nix-prefetch) to simplify the
+> usage of `fetchFromGitHub`.
+
+### Flakes & Home-Manager
 
 Add `pywal-nix` to your flake inputs.
 
 ```nix
 {
-  inputs = {
-    pywal-nix = {
-      url = "github:Fuwn/pywal-nix";
-      inputs.nixpkgs.follows = "nixpkgs"; # Recommended
-    };
+  inputs.pywal-nix = {
+    url = "github:Fuwn/pywal-nix";
+    inputs.nixpkgs.follows = "nixpkgs"; # Recommended
   };
 }
 ```
-
-### Home Manager
 
 After adding `pywal-nix` to your flake inputs, consume it as a Home Manager
 module.
@@ -42,8 +60,10 @@ inputs.home-manager.lib.homeManagerConfiguration {
 # ...
 ```
 
-Finally, configure and access `pywal-nix` in your Home Manager configuration through
-the `pywal-nix` attribute.
+## Configuration & Usage
+
+Configure and access `pywal-nix` in your Home Manager configuration through the
+`pywal-nix` attribute.
 
 ```nix
 { pkgs, config, ... }:
