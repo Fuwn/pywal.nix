@@ -52,7 +52,9 @@ the `pywal-nix` attribute.
   pywal-nix = {
     wallpaper = /path/to/wallpaper.png; # Required
     light = false;                      # Defaults to false
-    backend = "wal";                    # One of "wal", "colorz", or "colorthief"; Defaults to "wal"
+    backend = "wal";                    # One of "colorthief", "colorz",
+                                        # "fast_colorthief", "haishoku",
+                                        # "schemer2", "wal"; Default to "wal"
   };
 
   # Example usage to print out few colours
@@ -100,6 +102,9 @@ licensed under the [MIT License](./pywal/LICENSE.md).
 
 - [`pywal/backends/colorthief.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/colorthief.py)
 - [`pywal/backends/colorz.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/colorz.py)
+- [`pywal/backends/fast_colorthief.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/fast_colorthief.py)
+- [`pywal/backends/haishoku.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/haishoku.py)
+- [`pywal/backends/schemer2.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/schemer2.py)
 - [`pywal/backends/wal.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/backends/wal.py)
 - [`pywal/colors.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/colors.py)
 - [`pywal/theme.py`](https://github.com/dylanaraps/pywal/blob/master/pywal/theme.py)
