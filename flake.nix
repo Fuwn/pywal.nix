@@ -80,7 +80,7 @@
                       vendorHash = null;
 
                       src = pkgs.fetchFromGitHub {
-                        owner = "Fuwn";
+                        owner = "nixports";
                         repo = "schemer2";
                         rev = "5dc8b0208efce6990c7dd0bf7fe3f044d11c65de";
                         hash = "sha256-/49TRM4B/EVJlj96RQ1RRsGdK2xP95FLkfwngKXL2ZI=";
