@@ -137,20 +137,22 @@
             };
           };
 
-          config.pywal-nix.colourScheme = {
-            inherit (config.pywal-nix) wallpaper;
+          config = {
+            pywal-nix.colourScheme = {
+              inherit (config.pywal-nix) wallpaper;
 
-            colours = colourScheme;
-            colors = colourScheme;
+              colours = colourScheme;
+              colors = colourScheme;
 
-            special = {
-              background = colourScheme.colour0;
-              foreground = colourScheme.colour15;
-              cursor = colourScheme.colour15;
+              special = {
+                background = colourScheme.colour0;
+                foreground = colourScheme.colour15;
+                cursor = colourScheme.colour15;
+              };
             };
-          };
 
-          config.pywal-nix.colorScheme = config.pywal-nix.colourScheme;
+            pywal-nix.colorScheme = config.pywal-nix.colourScheme;
+          };
         };
 
       formatter = nixpkgs.legacyPackages."${system}".nixfmt-rfc-style;
