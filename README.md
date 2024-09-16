@@ -75,6 +75,7 @@ Configure and access `pywal-nix` in your Home Manager configuration through the
     backend = "wal";                    # One of "colorthief", "colorz",
                                         # "fast_colorthief", "haishoku",
                                         # "schemer2", "wal"; Default to "wal"
+    enableKittyIntegration = true;      # Defaults to true
   };
 
   # Example usage to print out few colours

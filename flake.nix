@@ -135,6 +135,11 @@
             colorScheme = lib.mkOption {
               type = lib.types.anything;
             };
+
+            enableKittyIntegration = lib.mkOption {
+              type = lib.types.bool;
+              default = true;
+            };
           };
 
           config = {
@@ -153,6 +158,28 @@
 
             pywal-nix.colorScheme = config.pywal-nix.colourScheme;
           };
+
+          config.programs.kitty.extraConfig = lib.mkIf config.pywal-nix.enableKittyIntegration ''
+            foreground ${config.pywal-nix.colourScheme.special.foreground}
+            background ${config.pywal-nix.colourScheme.special.background}
+            cursor ${config.pywal-nix.colourScheme.special.cursor}
+            color0 ${config.pywal-nix.colourScheme.colours.colour0}
+            color1 ${config.pywal-nix.colourScheme.colours.colour1}
+            color2 ${config.pywal-nix.colourScheme.colours.colour2}
+            color3 ${config.pywal-nix.colourScheme.colours.colour3}
+            color4 ${config.pywal-nix.colourScheme.colours.colour4}
+            color5 ${config.pywal-nix.colourScheme.colours.colour5}
+            color6 ${config.pywal-nix.colourScheme.colours.colour6}
+            color7 ${config.pywal-nix.colourScheme.colours.colour7}
+            color8 ${config.pywal-nix.colourScheme.colours.colour8}
+            color9 ${config.pywal-nix.colourScheme.colours.colour9}
+            color10 ${config.pywal-nix.colourScheme.colours.colour10}
+            color11 ${config.pywal-nix.colourScheme.colours.colour11}
+            color12 ${config.pywal-nix.colourScheme.colours.colour12}
+            color13 ${config.pywal-nix.colourScheme.colours.colour13}
+            color14 ${config.pywal-nix.colourScheme.colours.colour14}
+            color15 ${config.pywal-nix.colourScheme.colours.colour15}
+          '';
         };
 
       formatter = nixpkgs.legacyPackages."${system}".nixfmt-rfc-style;
