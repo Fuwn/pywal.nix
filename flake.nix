@@ -38,14 +38,14 @@
                   buildInputs = with pkgs; [
                     imagemagick
                     jq
-                    python312Packages.colorthief
-                    colorz
-                    python312Packages.pillow
-                    python312Packages.numpy
                     (pkgs.python3.withPackages (ps: [
+                      ps.colorthief
+                      ps.numpy
+                      ps.pillow
                       (ps.buildPythonPackage rec {
                         pname = "haishoku";
                         version = "1.1.8";
+                        format = "setuptools";
                         doCheck = false;
 
                         src = ps.fetchPypi {
@@ -56,13 +56,18 @@
                       (ps.buildPythonPackage {
                         pname = "fast_colorthief";
                         version = "0.0.5";
+                        format = "setuptools";
                         doCheck = false;
                         dontUseCmakeConfigure = true;
+
+                        # The vendored CMakeLists.txt requests a pre-3.5 policy
+                        # version, which modern CMake refuses outright.
+                        env.CMAKE_POLICY_VERSION_MINIMUM = "3.5";
 
                         nativeBuildInputs = [
                           pkgs.cmake
                           ps.setuptools
-                          ps.setuptools_scm
+                          ps.setuptools-scm
                           ps.scikit-build
                         ];
 
@@ -71,6 +76,23 @@
                           rev = "92eda78157bed309ef9c12e85708ae21241e11d0";
                           hash = "sha256-0S8YI2DlEMx75vuAxcWzTBCcerLvULdh4nY2k3zdsqg=";
                           fetchSubmodules = true;
+                        };
+                      })
+                      (ps.buildPythonPackage rec {
+                        pname = "colorz";
+                        version = "1.0.3";
+                        format = "setuptools";
+                        doCheck = false;
+
+                        propagatedBuildInputs = [
+                          ps.pillow
+                          ps.scipy
+                        ];
+
+                        src = ps.fetchPypi {
+                          inherit pname version;
+
+                          hash = "sha256-wE/2OJYoHy7hMnvN/y52ozn3BVmr2KJdKMDR+yhIDT4=";
                         };
                       })
                     ]))
