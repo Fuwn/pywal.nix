@@ -98,15 +98,19 @@
                     ]))
                     (pkgs.buildGoModule {
                       pname = "schemer2";
-                      version = "5dc8b0208efce6990c7dd0bf7fe3f044d11c65de";
+                      version = "89a66cbf40440e82921719c6919f11bb563d7cfa";
                       vendorHash = null;
 
                       src = pkgs.fetchFromGitHub {
-                        owner = "nixports";
+                        owner = "thefryscorer";
                         repo = "schemer2";
-                        rev = "5dc8b0208efce6990c7dd0bf7fe3f044d11c65de";
-                        hash = "sha256-/49TRM4B/EVJlj96RQ1RRsGdK2xP95FLkfwngKXL2ZI=";
+                        rev = "89a66cbf40440e82921719c6919f11bb563d7cfa";
+                        hash = "sha256-EKjVz4NkxtxqGissFwlzUahFut9UAxS8icxx3V7aNnw=";
                       };
+
+                      postPatch = ''
+                        printf 'module github.com/Fuwn/schemer2\n\ngo 1.22.5\n' > go.mod
+                      '';
                     })
                   ];
                 }
